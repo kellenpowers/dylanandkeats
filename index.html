@@ -1,0 +1,652 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Dylan & Keats makes playful, heartfelt kids' songs born from the chaos of parenting. Songs by Kellen Powers.">
+<meta property="og:title" content="Dylan &amp; Keats">
+<meta property="og:description" content="Dylan & Keats makes playful, heartfelt kids' songs born from the chaos of parenting. Songs by Kellen Powers.">
+<meta property="og:url" content="https://dylanandkeats.com">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#EFDEC2">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='7' r='3.8' fill='%231F2547'/%3E%3Cellipse cx='12' cy='14.6' rx='7.8' ry='8' fill='%23E5352B' stroke='%231F2547' stroke-width='1.4'/%3E%3Cpath d='M12 7.5v15' stroke='%231F2547' stroke-width='1.4'/%3E%3Ccircle cx='8.4' cy='12.4' r='1.6' fill='%231F2547'/%3E%3Ccircle cx='15.6' cy='12.4' r='1.6' fill='%231F2547'/%3E%3Ccircle cx='8.9' cy='18' r='1.3' fill='%231F2547'/%3E%3Ccircle cx='15.1' cy='18' r='1.3' fill='%231F2547'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://dylanandkeats.com/img/logo.webp">
+<link rel="apple-touch-icon" href="img/logo.webp">
+<link rel="canonical" href="https://dylanandkeats.com/">
+<title>Dylan &amp; Keats</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Londrina+Solid:wght@400;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght,BNCE,INFM@300..800,-100..100,0..100&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+/* Layout: built out of the Dylan & Keats robot logo. Cream poster paper, a mustard sun,
+   cherry/sky/lime inks, thick black outlines, and the split ticket banner from the logo.
+   Dark mode borrows the night-brown of the "Grampa Ate My Socks" cover. */
+:root{
+  --paper:#EFDEC2;      /* the logo's own cream */
+  --paper-2:#F6E9D3;
+  --plate:#FBF5E8;      /* banner plates and cards, same in both themes */
+  --plate-ink:#1C1A17;
+  --ink:#1C1A17;
+  --ink-soft:#54493B;
+  --line:#1C1A17;       /* outlines, both themes */
+  --drop:#1C1A17;       /* hard offset shadow */
+  --sun:#F2B630;
+  --cherry:#E0402C;
+  --sky:#4FA3D9;
+  --robo:#A7D3EC;
+  --lime:#9DC23A;
+  --link:#B52E1E;
+
+  --font-display:"Londrina Solid","Arial Narrow","Impact",sans-serif;
+  --font-hand:"Shantell Sans","Comic Neue","Chalkboard SE","Marker Felt",cursive;
+  --font-body:"Atkinson Hyperlegible","Verdana","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#23201B; --paper-2:#2D2922; --ink:#F1E4CC; --ink-soft:#C8BAA0; --drop:#0B0A08;
+    --sun:#F5BE3C; --cherry:#FF6A55; --sky:#6DB8EA; --robo:#A7D3EC; --lime:#B0D453; --link:#FFB4A6;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#23201B; --paper-2:#2D2922; --ink:#F1E4CC; --ink-soft:#C8BAA0; --drop:#0B0A08;
+  --sun:#F5BE3C; --cherry:#FF6A55; --sky:#6DB8EA; --robo:#A7D3EC; --lime:#B0D453; --link:#FFB4A6;
+  color-scheme:dark;
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--font-body); font-size:1.0625rem; line-height:1.6;
+  padding-inline:16px; padding-block:0; overflow-x:hidden;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .28 0 0 0 0 .2 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+a{color:var(--link); text-underline-offset:3px; text-decoration-thickness:2px}
+a:hover{color:var(--cherry)}
+:focus-visible{outline:3px dashed var(--cherry); outline-offset:4px}
+img{max-width:100%; display:block}
+.wrap{max-width:1120px; margin-inline:auto; position:relative}
+section{position:relative}
+h1,h2,h3{margin:0; text-wrap:balance}
+h2{font-family:var(--font-display); font-weight:900; font-size:clamp(2.3rem,5.4vw,3.6rem); line-height:.95; letter-spacing:.01em; text-transform:uppercase}
+.hand{font-family:var(--font-hand); font-variation-settings:"INFM" 100,"BNCE" 30}
+.sec-head{display:flex; flex-wrap:wrap; align-items:end; justify-content:space-between; gap:8px 24px; margin-bottom:34px}
+.sec-head p{margin:0; font-family:var(--font-hand); font-size:1.1rem; color:var(--ink-soft); font-variation-settings:"INFM" 100,"BNCE" 20; max-width:34ch}
+
+/* the split ticket banner from the logo */
+.ticket{display:inline-block; background:var(--line); padding:3px; clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%)}
+.ticket > span{display:block; background:var(--plate); color:var(--plate-ink); clip-path:polygon(0 0,100% 0,95% 50%,100% 100%,0 100%,5% 50%);
+  font-family:var(--font-display); font-weight:900; text-transform:uppercase; letter-spacing:.03em; padding:.18em 1.15em .12em; line-height:1.1}
+.amp-badge{display:inline-grid; place-items:center; width:2.2em; height:2.2em; background:var(--cherry); color:var(--plate); border:3px solid var(--line);
+  clip-path:polygon(0 0,50% 18%,100% 0,100% 100%,50% 82%,0 100%); font-family:var(--font-hand); font-weight:800; font-size:1.3em}
+
+/* ---------- top strip ---------- */
+.strip{display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px 24px; padding-block:16px 0}
+.brand{display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink); font-family:var(--font-display); font-weight:900; font-size:1.45rem; text-transform:uppercase; letter-spacing:.02em}
+.brand img{width:46px; height:46px; border-radius:50%; border:2.5px solid var(--line); background:#EFDEC2}
+.brand span{color:var(--cherry)}
+.strip nav{display:flex; flex-wrap:wrap; gap:6px 20px}
+.strip nav a{font-family:var(--font-display); font-weight:400; font-size:1.2rem; letter-spacing:.04em; text-transform:uppercase; color:var(--ink); text-decoration:none;
+  background:linear-gradient(var(--sun),var(--sun)) 0 90%/0 40% no-repeat; transition:background-size .25s}
+.strip nav a:hover{background-size:100% 40%; color:var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:24px 48px; align-items:center; padding-block:30px 56px}
+.hero .ticket{font-size:1.05rem; transform:rotate(-2deg); margin-bottom:22px}
+.hero h1{font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:clamp(2.7rem,6.6vw,5.3rem); line-height:.93; letter-spacing:.005em}
+.hero h1 .pop{color:var(--c); -webkit-text-stroke:.07em var(--line); paint-order:stroke fill; display:inline-block}
+.hero h1 .pop:nth-of-type(odd){transform:rotate(-2deg)}
+.hero h1 .pop:nth-of-type(even){transform:rotate(1.5deg)}
+.lede{font-size:1.25rem; max-width:36ch; margin:22px 0 0}
+.go{display:inline-flex; align-items:center; gap:10px; margin-top:26px; font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.3rem; letter-spacing:.03em;
+  color:var(--plate-ink); background:var(--sun); border:3px solid var(--line); border-radius:999px; padding:.4em 1.2em .3em; text-decoration:none; box-shadow:5px 5px 0 var(--drop); transition:transform .15s, box-shadow .15s}
+.go:hover{transform:translate(2px,2px); box-shadow:3px 3px 0 var(--drop); color:var(--plate-ink)}
+.logo-disc{position:relative; justify-self:center; width:min(440px,100%)}
+.logo-disc img{width:100%; height:auto; border-radius:50%; background:#EFDEC2; transform:rotate(3deg)}
+.logo-disc .scrawl{position:absolute; left:-6%; bottom:4%; font-family:var(--font-hand); font-size:1.05rem; color:var(--ink); transform:rotate(-8deg); font-variation-settings:"INFM" 100,"BNCE" 50; max-width:14ch; line-height:1.2}
+
+/* ---------- records ---------- */
+.records{padding-block:24px 80px}
+.crate{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:40px 30px}
+.rec{position:relative; perspective:1400px}
+.rec:nth-child(1){transform:rotate(-2deg)}
+.rec:nth-child(2){transform:rotate(1.5deg) translateY(16px)}
+.rec:nth-child(3){transform:rotate(-1deg)}
+.rec:nth-child(4){transform:rotate(2deg) translateY(10px)}
+.sleeve{position:relative; aspect-ratio:1; transition:transform .7s cubic-bezier(.3,1.35,.5,1); transform-style:preserve-3d}
+.rec.flipped .sleeve{transform:rotateY(180deg)}
+.side{position:absolute; inset:0; border:4px solid var(--line); border-radius:6px; box-shadow:7px 7px 0 var(--drop); backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; background:var(--plate); color:var(--plate-ink)}
+.front{padding:0; cursor:pointer; font:inherit; width:100%; height:100%}
+.front img,.front svg{width:100%; height:100%; object-fit:cover; display:block}
+.back{transform:rotateY(180deg); padding:16px 16px 14px; display:flex; flex-direction:column; gap:8px; overflow:auto}
+.back h3{font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.5rem; line-height:1}
+.back p{margin:0; font-size:.92rem; line-height:1.45}
+.back .len{font:700 .78rem var(--font-body); letter-spacing:.08em; text-transform:uppercase; color:#54493B; font-variant-numeric:tabular-nums}
+.tracks{margin:2px 0 0; padding:0; list-style:none; counter-reset:t; font-size:.92rem; font-weight:700}
+.tracks li{display:flex; gap:8px; padding:3px 0; border-bottom:1.5px dashed rgba(28,26,23,.25)}
+.tracks li::before{counter-increment:t; content:counter(t); width:1em; color:#B52E1E}
+.tracks li span:first-child{flex:1}
+.tracks li span:last-child{font-variant-numeric:tabular-nums; font-weight:400}
+.back .links{display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:auto; font-weight:700; font-size:.9rem}
+.back .links a{color:#B52E1E}
+.flipback{align-self:flex-start; border:0; background:none; padding:0; font:700 .78rem var(--font-body); letter-spacing:.08em; text-transform:uppercase; color:#54493B; cursor:pointer}
+.flipback:hover{color:#E0402C}
+.rec .ticket{position:relative; z-index:2; margin:-14px auto 0; display:table; font-size:.98rem; text-align:center}
+.rec .ticket > span{padding-inline:1.3em}
+
+/* ---------- band ---------- */
+.band{padding-block:20px 90px}
+.who{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,.9fr); gap:28px 56px; align-items:center}
+.who-text p{max-width:46ch; margin:16px 0 0}
+.who-text .big{font-family:var(--font-hand); font-weight:700; font-size:1.6rem; line-height:1.3; margin-top:20px; font-variation-settings:"INFM" 100,"BNCE" 30}
+.dress{position:relative; margin:0; display:flex; flex-direction:column; align-items:center; padding-top:10px}
+.dress::before{content:""; position:absolute; left:50%; top:44%; width:min(400px,92%); aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; background:var(--sun); border:4px solid var(--line)}
+.member{position:relative; border:0; background:none; padding:0; cursor:pointer; height:clamp(300px,38vw,430px); width:100%; display:flex; align-items:end; justify-content:center}
+.member img{height:100%; width:auto; max-width:100%; object-fit:contain; object-position:bottom; filter:drop-shadow(4px 5px 0 rgba(28,26,23,.35)); transition:transform .2s}
+.member:hover img{transform:translateY(-6px) rotate(-1.5deg)}
+.member.pop img{animation:pop .45s cubic-bezier(.3,1.7,.5,1)}
+@keyframes pop{0%{transform:scale(.6) rotate(-8deg); opacity:.2}100%{transform:none; opacity:1}}
+.dress .ticket{position:relative; margin-top:-20px; font-size:1.9rem}
+.dress figcaption{margin-top:12px; text-align:center; font-family:var(--font-hand); font-size:1.15rem; line-height:1.35; font-variation-settings:"INFM" 100,"BNCE" 20}
+.dress small{display:block; font-family:var(--font-body); color:var(--ink-soft); font-size:.85rem; margin-top:4px}
+
+/* ---------- play ---------- */
+.play{display:grid; grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr); gap:40px; padding-block:10px 84px; align-items:start}
+.play h2 small{display:block; font-family:var(--font-hand); text-transform:none; font-weight:500; font-size:1.15rem; color:var(--ink-soft); margin-top:10px; letter-spacing:0; font-variation-settings:"INFM" 100,"BNCE" 0}
+.robot{position:relative; margin-top:44px; background:var(--robo); border:4px solid var(--line); border-radius:22px; padding:30px 22px 22px; box-shadow:7px 7px 0 var(--drop); color:var(--plate-ink)}
+.robot::before,.robot::after{content:""; position:absolute; top:-34px; width:4px; height:30px; background:var(--line)}
+.robot::before{left:22%} .robot::after{right:22%}
+.robot .bulb{position:absolute; top:-46px; width:18px; height:18px; border-radius:50%; background:var(--sky); border:3px solid var(--line)}
+.robot .bulb.l{left:calc(22% - 7px)} .robot .bulb.r{right:calc(22% - 7px)}
+.robot .grille{display:flex; justify-content:center; gap:6px; margin-bottom:18px}
+.robot .grille i{width:22px; height:6px; background:var(--line); border-radius:3px; opacity:.75}
+.keys{display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(10px,2.4vw,18px)}
+.key{--c:#E0402C; aspect-ratio:1; border-radius:50%; border:4px solid #1C1A17; background:radial-gradient(circle at 35% 30%, rgba(255,255,255,.55) 0 14%, transparent 15%), var(--c);
+  box-shadow:0 6px 0 #1C1A17; cursor:pointer; font:900 1.2rem var(--font-display); color:#1C1A17; transition:transform .08s, box-shadow .08s; padding:0}
+.key:active,.key.hit{transform:translateY(5px); box-shadow:0 1px 0 #1C1A17}
+.cap{margin:12px 2px 0; color:var(--ink-soft); font-size:.92rem}
+
+.hunt{position:relative; background:var(--plate); color:var(--plate-ink); border:4px solid var(--line); border-radius:6px; box-shadow:7px 7px 0 var(--drop); padding:24px 22px 22px; transform:rotate(-1.2deg)}
+.hunt h3{font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.9rem; line-height:1}
+.hunt p{margin:8px 0 0; font-size:.98rem}
+.jar{display:block; width:min(200px,68%); margin:16px auto 6px; height:auto}
+.jar .slot{opacity:0; transform-box:fill-box; transform-origin:center; transform:scale(.2); transition:opacity .3s, transform .4s cubic-bezier(.3,1.6,.5,1)}
+.jar .slot.in{opacity:1; transform:scale(1)}
+.count{text-align:center; font-family:var(--font-display); font-weight:900; font-size:1.45rem; text-transform:uppercase; margin:0}
+.release{display:block; margin:12px auto 0; font:900 1.05rem var(--font-display); text-transform:uppercase; letter-spacing:.04em; padding:8px 18px 6px; border-radius:999px; border:3px solid #1C1A17; background:#F2B630; color:#1C1A17; cursor:pointer}
+.release:hover{background:#E0402C; color:#FBF5E8}
+.bee{position:absolute; z-index:5; width:46px; height:42px; padding:6px; border:0; background:none; cursor:pointer; transform:rotate(var(--r,0deg)); animation:hover 2.8s ease-in-out infinite}
+.bee svg{width:100%; height:100%; display:block}
+.bee:hover{scale:1.2}
+.bee.caught{animation:flyoff .6s ease-in forwards; pointer-events:none}
+@keyframes hover{50%{translate:0 -5px}}
+@keyframes flyoff{to{transform:translate(40px,-110px) rotate(30deg) scale(.3); opacity:0}}
+
+/* ---------- letter ---------- */
+.grownups{padding-block:10px 90px; display:grid; grid-template-columns:minmax(0,.55fr) minmax(0,1.45fr); gap:32px 48px; align-items:start}
+.grownups .aside p{color:var(--ink-soft); margin:14px 0 0; max-width:30ch}
+.letter{position:relative; background:var(--plate); color:var(--plate-ink); border:4px solid var(--line); border-radius:4px; box-shadow:8px 8px 0 var(--drop);
+  padding:44px clamp(20px,5vw,56px) 40px clamp(46px,8vw,90px); transform:rotate(-.6deg);
+  background-image:linear-gradient(90deg, transparent calc(clamp(46px,8vw,90px) - 16px), rgba(224,64,44,.5) calc(clamp(46px,8vw,90px) - 16px), rgba(224,64,44,.5) calc(clamp(46px,8vw,90px) - 14px), transparent calc(clamp(46px,8vw,90px) - 14px)),
+    repeating-linear-gradient(transparent 0 31px, rgba(79,163,217,.3) 31px 32px);
+  background-position:0 0, 0 43px}
+.letter p{margin:0 0 32px; font-size:1.08rem; line-height:32px; max-width:62ch}
+.letter .hi{font-family:var(--font-hand); font-size:1.5rem; font-weight:700; font-variation-settings:"INFM" 100,"BNCE" 30}
+.letter .sign{font-family:var(--font-hand); font-size:2.3rem; font-weight:700; line-height:1; color:#B52E1E; transform:rotate(-4deg); display:inline-block; margin:0; font-variation-settings:"INFM" 100,"BNCE" 80}
+.ring{position:absolute; right:-6px; top:-24px; width:140px; height:140px; pointer-events:none; opacity:.45}
+
+/* ---------- book ---------- */
+.book{display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr); gap:36px 56px; align-items:center; padding-block:0 90px}
+.cover{justify-self:stretch; transform:rotate(-1.5deg)}
+.cover img{width:100%; height:auto; border:4px solid var(--line); border-radius:6px; box-shadow:8px 8px 0 var(--drop)}
+.book .tag{font-family:var(--font-hand); font-size:1.3rem; line-height:1.35; color:var(--ink); font-variation-settings:"INFM" 100,"BNCE" 20}
+.eyebrow{font:700 .8rem var(--font-body); letter-spacing:.12em; text-transform:uppercase; color:var(--cherry); margin:0 0 10px}
+.book p{max-width:52ch; margin:16px 0 0}
+
+/* ---------- listen ---------- */
+.listen{padding-block:0 84px}
+.listen > p{max-width:56ch; color:var(--ink-soft); margin:14px 0 0}
+.stickers{display:flex; flex-wrap:wrap; gap:18px 18px; margin:28px 0 0; padding:0; list-style:none}
+.stickers a{display:block; padding:.42em 1.05em .32em; font-family:var(--font-display); font-weight:900; text-transform:uppercase; letter-spacing:.03em; font-size:1.35rem; color:#1C1A17; text-decoration:none;
+  border:3px solid #1C1A17; border-radius:12px; box-shadow:4px 4px 0 var(--drop); transition:transform .15s}
+.stickers small{display:block; font:400 .78rem var(--font-body); text-transform:none; letter-spacing:0}
+.stickers li:nth-child(6n+1) a{background:#F2B630; transform:rotate(-3deg)}
+.stickers li:nth-child(6n+2) a{background:#F59A8C; transform:rotate(2deg)}
+.stickers li:nth-child(6n+3) a{background:#B8D86A; transform:rotate(-1deg)}
+.stickers li:nth-child(6n+4) a{background:#A7D3EC; transform:rotate(3deg)}
+.stickers li:nth-child(6n+5) a{background:#FBF5E8; transform:rotate(-2deg)}
+.stickers li:nth-child(6n+6) a{background:#F2B630; transform:rotate(1.5deg)}
+.stickers a:hover{transform:rotate(0) scale(1.06)}
+.follow-h{margin:40px 0 0; font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.6rem; letter-spacing:.02em}
+.follow-h span{font-family:var(--font-hand); text-transform:none; font-weight:600; font-size:1.1rem; color:var(--ink-soft); margin-left:6px; letter-spacing:0}
+.follow{display:flex; flex-wrap:wrap; gap:10px 12px; margin:14px 0 0; padding:0; list-style:none}
+.follow a{display:block; padding:7px 16px 6px; border:3px solid var(--line); border-radius:999px; background:var(--plate); color:var(--plate-ink); text-decoration:none; font-weight:700; font-size:.98rem; transition:background .15s}
+.follow a:hover{background:var(--sun); color:var(--plate-ink)}
+
+/* ---------- shows ---------- */
+.shows{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:32px 56px; padding-block:0 84px; align-items:center}
+.shows p{max-width:46ch; margin:16px 0 0}
+.mail{position:relative; background:var(--plate); color:var(--plate-ink); border:4px solid var(--line); border-radius:6px; box-shadow:8px 8px 0 var(--drop); padding:28px 24px; transform:rotate(1.2deg)}
+.mail .label{font:700 .8rem var(--font-body); letter-spacing:.1em; text-transform:uppercase; color:#54493B; margin:0}
+.mail .addr{display:block; font-family:var(--font-display); font-weight:900; font-size:clamp(1.3rem,3.6vw,1.9rem); color:#1C1A17; margin:6px 0 16px; overflow-wrap:anywhere; user-select:all}
+.row{display:flex; flex-wrap:wrap; gap:10px}
+.btn{font:700 .95rem var(--font-body); padding:10px 18px; border-radius:999px; border:3px solid #1C1A17; background:#FBF5E8; color:#1C1A17; cursor:pointer; text-decoration:none}
+.btn.primary{background:#E0402C; color:#FBF5E8}
+.btn:hover{background:#F2B630; color:#1C1A17}
+.ok{margin:12px 0 0; font-size:.9rem; color:#2E6B1F; min-height:1.4em}
+.stamp{position:absolute; right:16px; top:-34px; width:86px; height:86px; transform:rotate(12deg)}
+
+footer{border-top:3px dashed color-mix(in srgb,var(--ink) 35%,transparent); padding-block:26px 40px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:12px 24px; color:var(--ink-soft); font-size:.9rem; position:relative}
+footer .hand{font-size:1.1rem; color:var(--ink)}
+
+@media (max-width:900px){
+  .crate{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .hero,.play,.grownups,.book,.shows,.who{grid-template-columns:minmax(0,1fr)}
+  .logo-disc{width:min(340px,86%); grid-row:1}
+}
+@media (max-width:560px){
+  .crate{grid-template-columns:minmax(0,1fr); gap:44px; max-width:340px; margin-inline:auto}
+}
+@media (max-width:480px){
+  .letter{transform:none}
+  .ring{width:100px; height:100px; right:0}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important; transition:none!important}
+  html{scroll-behavior:auto}
+  .sleeve{transform-style:flat}
+  .rec.flipped .sleeve{transform:none}
+  .back{transform:none; display:none}
+  .rec.flipped .back{display:flex}
+  .rec.flipped .front{visibility:hidden}
+}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="bee" viewBox="0 0 34 30">
+      <ellipse cx="13" cy="8" rx="6.5" ry="5.5" fill="#EAF6FF" stroke="#1C1A17" stroke-width="1.6"/>
+      <ellipse cx="20.5" cy="7" rx="5.5" ry="5" fill="#EAF6FF" stroke="#1C1A17" stroke-width="1.6"/>
+      <path d="M4.5 19.5 0.8 20.8 4.6 22.4Z" fill="#1C1A17"/>
+      <ellipse cx="16" cy="19.5" rx="11.5" ry="8.2" fill="#F2B630" stroke="#1C1A17" stroke-width="1.8"/>
+      <path d="M12.5 11.8q-2.2 7.7 0 15.4M19 11.6q-2.2 7.9 0 15.8" stroke="#1C1A17" stroke-width="3" fill="none"/>
+      <circle cx="28" cy="17" r="4.6" fill="#1C1A17"/>
+      <circle cx="29.4" cy="15.8" r="1.3" fill="#fff"/>
+      <path d="M27 12.6q-1-4 1.5-6.5M30 13q1.5-3.6 4-4.2" stroke="#1C1A17" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+  <header class="strip">
+    <a class="brand" href="#top"><img src="img/logo.webp" alt="" width="46" height="46">Dylan <span>&amp;</span> Keats</a>
+    <nav aria-label="Sections">
+      <a href="#records">Songs</a>
+      <a href="#band">About</a>
+      <a href="#play">Play</a>
+      <a href="#grownups">Grown-ups</a>
+      <a href="#shows">Shows</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="top">
+    <div>
+      <span class="ticket"><span>Music for kids</span></span>
+      <h1>Songs about
+        <span class="pop" style="--c:var(--sky)">potties,</span>
+        <span class="pop" style="--c:var(--lime)">bugs,</span>
+        <span class="pop" style="--c:var(--sun)">pizza</span>
+        and a <span class="pop" style="--c:var(--cherry)">grampa who eats socks.</span>
+      </h1>
+      <p class="lede">Made up at home for kids and the tired grown-ups who love them.</p>
+      <a class="go" href="#records">Hear the songs</a>
+    </div>
+    <div class="logo-disc">
+      <img src="img/logo.webp" alt="The Dylan &amp; Keats logo: two retro robots holding a banner that says Dylan &amp; Keats, Music for kids" width="900" height="900">
+    </div>
+    <button class="bee" data-bee style="--r:-12deg; left:44%; top:6px" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
+  </section>
+
+  <section class="records" id="records" aria-labelledby="rec-h">
+    <div class="sec-head">
+      <h2 id="rec-h">The songs</h2>
+      <p>Six songs so far. Tap a cover to flip it over and read the story behind it, or <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">play them all on Spotify</a>.</p>
+    </div>
+    <div class="crate">
+      <div class="rec">
+        <div class="sleeve">
+          <button class="side front" aria-expanded="false" aria-controls="b-grampa" aria-label="Grampa Ate My Socks. Flip the cover over."><img src="img/cover-grampa.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <div class="side back" id="b-grampa">
+            <h3>Grampa Ate My Socks</h3>
+            <p>Every missing sock in a house has to go somewhere. This song has a theory, and it involves Grampa.</p><p class="len">2:36 · single</p>
+            <p class="links">
+              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
+            </p>
+            <button class="flipback" type="button">Flip back</button>
+          </div>
+        </div>
+        <span class="ticket"><span>Grampa Ate My Socks</span></span>
+      </div>
+
+      <div class="rec">
+        <div class="sleeve">
+          <button class="side front" aria-expanded="false" aria-controls="b-bugs" aria-label="Bug Buds. Flip the cover over."><img src="img/cover-bugbuds.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <div class="side back" id="b-bugs">
+            <h3>Bug Buds</h3>
+            <p>A song about making friends with bugs. Go slow and say hi to the bee. Out since January 21, 2025, and best played outside.</p><p class="len">2:01 · single</p>
+            <p class="links">
+              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
+            </p>
+            <button class="flipback" type="button">Flip back</button>
+          </div>
+        </div>
+        <span class="ticket"><span>Bug Buds</span></span>
+      </div>
+
+      <div class="rec">
+        <div class="sleeve">
+          <button class="side front" aria-expanded="false" aria-controls="b-potty" aria-label="Potty Party. Flip the cover over."><img src="img/cover-potty.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <div class="side back" id="b-potty">
+            <h3>Potty Party</h3>
+            <p>Potty training is mostly sitting on a bathroom floor, singing anything you can think of. This is the one that stuck. It turns the scariest seat in the house into a party.</p><p class="len">2:18 · single</p>
+            <p class="links">
+              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
+            </p>
+            <button class="flipback" type="button">Flip back</button>
+          </div>
+        </div>
+        <span class="ticket"><span>Potty Party</span></span>
+      </div>
+
+      <div class="rec">
+        <div class="sleeve">
+          <button class="side front" aria-expanded="false" aria-controls="b-kd" aria-label="Kitchen Disco, the album. Flip the cover over.">
+            <img src="img/cover-kitchen-disco.webp" alt="" width="800" height="800" loading="lazy">
+          </button>
+          <div class="side back" id="b-kd">
+            <h3>Kitchen Disco</h3>
+            <p class="len">The album · on the playlist</p>
+            <ol class="tracks">
+              <li><span>Pizza</span><span>1:58</span></li>
+              <li><span>Nachos</span><span>2:07</span></li>
+              <li><span>French Fries</span><span>2:40</span></li>
+            </ol>
+            <p class="links">
+              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+                          </p>
+            <button class="flipback" type="button">Flip back</button>
+          </div>
+        </div>
+        <span class="ticket"><span>Kitchen Disco · album</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="band" aria-labelledby="band-h">
+    <div class="who">
+      <div class="who-text">
+        <h2 id="band-h">Who is Dylan &amp; Keats?</h2>
+        <p class="big">Just me. I'm Kellen, and I write songs for my kids.</p>
+        <p>The name is borrowed from two of the best lyricists who ever lived, Bob Dylan and John Keats. Both of them would be ashamed to find their names on a song about the potty. Sorry, gentlemen.</p>
+        <p>The songs start at home, usually in the middle of whatever battle we're having that week. Bath time, or a missing sock. If a song makes it out of our kitchen, it ends up here.</p>
+      </div>
+      <figure class="dress">
+        <button class="member" id="kellen" type="button" aria-describedby="cap-kellen">
+          <img src="img/keats-red.webp" alt="Kellen in a red shirt and cargo shorts" width="430" height="900">
+        </button>
+        <span class="ticket"><span>Kellen</span></span>
+        <figcaption id="cap-kellen" aria-live="polite">Backyard Kellen.<small>Outfit 1 of 4 · tap me to change</small></figcaption>
+      </figure>
+    </div>
+    <button class="bee" data-bee style="--r:20deg; right:1%; top:8%" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
+  </section>
+
+  <section class="play" id="play" aria-labelledby="play-h">
+    <div>
+      <h2 id="play-h">Play
+        <small>The robot keyboard. Every note sounds good, so you can't mess it up.</small>
+      </h2>
+      <div class="robot">
+        <span class="bulb l" aria-hidden="true"></span><span class="bulb r" aria-hidden="true"></span>
+        <div class="grille" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="keys" role="group" aria-label="Robot keyboard">
+          <button class="key" style="--c:#E0402C" data-note="261.63" aria-label="Note C">1</button>
+          <button class="key" style="--c:#F2B630" data-note="293.66" aria-label="Note D">2</button>
+          <button class="key" style="--c:#9DC23A" data-note="329.63" aria-label="Note E">3</button>
+          <button class="key" style="--c:#4FA3D9" data-note="392.00" aria-label="Note G">4</button>
+          <button class="key" style="--c:#4FA3D9" data-note="440.00" aria-label="Note A">5</button>
+          <button class="key" style="--c:#9DC23A" data-note="523.25" aria-label="High C">6</button>
+          <button class="key" style="--c:#F2B630" data-note="587.33" aria-label="High D">7</button>
+          <button class="key" style="--c:#E0402C" data-note="659.25" aria-label="High E">8</button>
+        </div>
+      </div>
+      <p class="cap">Tap the buttons, or press 1 to 8 on a keyboard. Try 1 3 5 3 1 for a lullaby.</p>
+    </div>
+
+    <div class="hunt" aria-labelledby="hunt-h">
+      <h3 id="hunt-h">Bug buds hunt</h3>
+      <p>Seven bees are buzzing around this page. Find them and tap them into the jar.</p>
+      <svg class="jar" viewBox="0 0 160 190" aria-hidden="true">
+        <g stroke-linecap="round" stroke-linejoin="round">
+          <rect x="34" y="12" width="92" height="24" rx="6" fill="#E0402C" stroke="#1C1A17" stroke-width="4"/>
+          <path d="M40 38q-16 12-16 34v86q0 20 20 20h72q20 0 20-20V72q0-22-16-34Z" fill="rgba(167,211,236,.45)" stroke="#1C1A17" stroke-width="4"/>
+          <path d="M42 66q-6 34 0 80" stroke="#fff" stroke-width="6" fill="none" opacity=".8"/>
+          <path d="M28 160q22-12 52-2t52-4" stroke="#9DC23A" stroke-width="6" fill="none"/>
+        </g>
+        <g>
+          <use class="slot" href="#bee" x="52" y="130" width="28" height="24"/>
+          <use class="slot" href="#bee" x="86" y="126" width="28" height="24"/>
+          <use class="slot" href="#bee" x="66" y="102" width="28" height="24"/>
+          <use class="slot" href="#bee" x="98" y="94" width="28" height="24"/>
+          <use class="slot" href="#bee" x="38" y="90" width="28" height="24"/>
+          <use class="slot" href="#bee" x="80" y="66" width="28" height="24"/>
+          <use class="slot" href="#bee" x="50" y="58" width="28" height="24"/>
+        </g>
+      </svg>
+      <p class="count" id="count" aria-live="polite">0 of 7 in the jar</p>
+      <button class="release" id="release" type="button" hidden>Let them fly home</button>
+    </div>
+    <button class="bee" data-bee style="--r:-8deg; left:30%; bottom:30px" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
+  </section>
+
+  <section class="grownups" id="grownups" aria-labelledby="gu-h">
+    <div class="aside">
+      <h2 id="gu-h">For the grown-ups</h2>
+      <p>The kids can go play the robot. This part is for you.</p>
+    </div>
+    <article class="letter">
+      <svg class="ring" viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="38" fill="none" stroke="#9A6B3C" stroke-width="5" stroke-dasharray="180 14 40 8"/></svg>
+      <p class="hi">Hi, grown-ups.</p>
+      <p>I should tell you up front that I am not a parenting expert. I have lost my temper over a shoe. I have lost a negotiation about bath time to someone who can't reach the light switch. Most of these songs started on a hard day, when something small turned into something big and I picked up a guitar because I was out of better ideas.</p>
+      <p>Sometimes it worked. The song got a laugh, the laugh broke the standoff, and we made it to the bath or to bed. Sometimes it didn't, and I said sorry later, which I'm learning is its own kind of song.</p>
+      <p>The songs are for kids. They're silly on purpose and catchy enough to follow you around the grocery store, and I apologize for that in advance. I write them for you too, though. For the parent standing in the hallway at 7:45 wondering why this is so hard. You are doing better than you think. I'm mostly making it up as I go, and some days the song is the only part I get right.</p>
+      <p class="sign">Kellen</p>
+      <button class="bee" data-bee style="--r:40deg; right:14px; bottom:14px" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
+    </article>
+  </section>
+
+  <section class="book" aria-labelledby="book-h">
+    <div class="cover">
+      <img src="img/max-and-the-dragon.webp" alt="Cover of Max and the Dragon by Kellen Powers: a bearded dad in a dim hallway smiles down at his son while a small glowing flame curls between them. Tagline: a story about getting it wrong, and getting better, together." width="1200" height="900" loading="lazy">
+    </div>
+    <div>
+      <p class="eyebrow">Also on the shelf</p>
+      <h2 id="book-h">Max and the Dragon</h2>
+      <p class="tag">A story about getting it wrong, and getting better, together.</p>
+      <p>I wrote a picture book too. It comes from the same place as the songs: the hard moments at home, and what happens after. It's meant to be read out loud, at bedtime, with somebody small leaning on your arm.</p>
+      <p><a href="#shows">Ask about copies and readings</a></p>
+    </div>
+    <button class="bee" data-bee style="--r:60deg; left:2px; bottom:40px" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
+  </section>
+
+  <section class="listen" id="listen" aria-labelledby="listen-h">
+    <h2 id="listen-h">Listen anywhere</h2>
+    <p>Search for Dylan &amp; Keats wherever your family plays music. If the car is the only place you get to hear any, I'm happy to ride along.</p>
+    <ul class="stickers">
+      <li><a href="https://open.spotify.com/artist/2OoyFXCEngoAIMqV1TySp6" target="_blank" rel="noopener">Spotify</a></li>
+      <li><a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a></li>
+      <li><a href="https://music.amazon.com/artists/B0DPH1D24K/dylan-keats" target="_blank" rel="noopener">Amazon Music</a></li>
+      <li><a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a></li>
+    </ul>
+    <h3 class="follow-h">Follow along <span>@dylan_and_keats</span></h3>
+    <ul class="follow">
+      <li><a href="https://www.tiktok.com/@dylan_and_keats" target="_blank" rel="noopener">TikTok</a></li>
+      <li><a href="https://www.instagram.com/dylan_and_keats" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://www.facebook.com/dylanandkeats" target="_blank" rel="noopener">Facebook</a></li>
+      <li><a href="https://x.com/dylan_and_keats" target="_blank" rel="noopener">X</a></li>
+      <li><a href="https://www.threads.com/@dylan_and_keats" target="_blank" rel="noopener">Threads</a></li>
+      <li><a href="https://linktr.ee/DylanAndKeats" target="_blank" rel="noopener">Linktree</a></li>
+    </ul>
+  </section>
+
+  <section class="shows" id="shows" aria-labelledby="shows-h">
+    <div>
+      <h2 id="shows-h">Come sing with me</h2>
+      <p>I play live for kids and the grown-ups who bring them. Libraries and backyard birthdays are my favorite rooms, and I'll bring the bug song.</p>
+      <p>Send the date and roughly how many little ones will be there. Song ideas from kids go to the same place, and I read every one.</p>
+    </div>
+    <div class="mail">
+      <svg class="stamp" viewBox="0 0 100 100" aria-hidden="true"><g fill="none" stroke="#E0402C" stroke-width="3.5"><circle cx="50" cy="50" r="40"/><circle cx="50" cy="50" r="30"/><path d="M8 44q10-6 20 0t20 0 20 0 20 0 20 0M8 56q10-6 20 0t20 0 20 0 20 0 20 0"/></g></svg>
+      <p class="label">Write to</p>
+      <span class="addr" id="addr">dylan&amp;keats@<wbr>powersonicrecords.com</span>
+      <div class="row">
+        <button class="btn primary" id="copy" type="button">Copy address</button>
+        <a class="btn" href="mailto:dylan%26keats@powersonicrecords.com?subject=Hello%20Dylan%20%26%20Keats">Open email</a>
+      </div>
+      <p class="ok" id="ok" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <footer>
+    <span class="hand">Thanks for stopping by. Go wash your hands.</span>
+    <span>Dylan &amp; Keats · songs by Kellen Powers · © <span id="yr">2026</span></span>
+    <button class="bee" data-bee style="--r:15deg; left:46%; top:-24px" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
+  </footer>
+</div>
+
+<script>
+(function(){
+  // flip the record covers
+  document.querySelectorAll('.rec').forEach(function(rec){
+    var front = rec.querySelector('.front'), back = rec.querySelector('.flipback');
+    front.addEventListener('click', function(){
+      rec.classList.add('flipped'); front.setAttribute('aria-expanded','true');
+      setTimeout(function(){ back.focus({preventScroll:true}); }, 350);
+    });
+    back.addEventListener('click', function(){
+      rec.classList.remove('flipped'); front.setAttribute('aria-expanded','false');
+      front.focus({preventScroll:true});
+    });
+  });
+
+  // dress-up
+  var outfits = [
+    {src:'img/keats-red.webp', alt:'Kellen in a red shirt and cargo shorts', say:'Backyard Kellen.'},
+    {src:'img/keats-jacket.webp', alt:'Kellen in a grey jacket and jeans', say:'Show night. Hands in pockets, trying to look cool.'},
+    {src:'img/keats-karate.webp', alt:'Kellen doing a karate kick in a white gi and black belt', say:'Black belt. In this drawing, anyway.'},
+    {src:'img/keats-merman.webp', alt:'Kellen as a merman with a green tail, arms crossed', say:'Merman Kellen. Please do not ask.'}
+  ];
+  (function(){
+    var btn = document.getElementById('kellen'), img = btn.querySelector('img'), cap = document.getElementById('cap-kellen'), i = 0;
+    outfits.forEach(function(o){ var p = new Image(); p.src = o.src; });
+    btn.addEventListener('click', function(){
+      i = (i + 1) % outfits.length; var o = outfits[i];
+      img.src = o.src; img.alt = o.alt;
+      cap.innerHTML = o.say + '<small>Outfit ' + (i+1) + ' of ' + outfits.length + ' · tap me to change</small>';
+      btn.classList.remove('pop'); void btn.offsetWidth; btn.classList.add('pop');
+      tone(392, .25, .15); setTimeout(function(){ tone(523.25, .3, .12); }, 90);
+    });
+  })();
+
+  // bee hunt
+  var bees = Array.prototype.slice.call(document.querySelectorAll('[data-bee]'));
+  var slots = document.querySelectorAll('.jar .slot');
+  var count = document.getElementById('count'), release = document.getElementById('release');
+  var found = 0, total = bees.length;
+  function render(){
+    slots.forEach(function(s,i){ s.classList.toggle('in', i < found); });
+    if(found >= total){ count.textContent = 'All ' + total + '! Bzz, thank you.'; release.hidden = false; }
+    else count.textContent = found + ' of ' + total + ' in the jar';
+  }
+  bees.forEach(function(b){
+    b.addEventListener('click', function(){
+      if(b.classList.contains('caught')) return;
+      b.classList.add('caught'); found++; chirp(); render();
+      setTimeout(function(){ b.hidden = true; }, 600);
+    });
+  });
+  release.addEventListener('click', function(){
+    found = 0; release.hidden = true;
+    bees.forEach(function(b){ b.hidden = false; b.classList.remove('caught'); });
+    render(); count.textContent = 'Bye bees! They flew back to their hiding spots.';
+  });
+  render();
+
+  // sound
+  var ctx = null;
+  function audio(){
+    if(!ctx){ var A = window.AudioContext || window.webkitAudioContext; if(!A) return null; ctx = new A(); }
+    if(ctx.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(freq, dur, vol){
+    var c = audio(); if(!c) return;
+    var t = c.currentTime, g = c.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(vol, t + 0.012);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    g.connect(c.destination);
+    [[1,'square',.35],[1,'triangle',1],[2,'sine',.2]].forEach(function(p){
+      var o = c.createOscillator(), og = c.createGain();
+      o.type = p[1]; o.frequency.value = freq * p[0]; og.gain.value = p[2];
+      o.connect(og); og.connect(g); o.start(t); o.stop(t + dur + .05);
+    });
+  }
+  function chirp(){ tone(880, .12, .1); setTimeout(function(){ tone(1174.66, .16, .09); }, 80); }
+  var keys = document.querySelectorAll('.key');
+  function hit(btn){
+    tone(parseFloat(btn.dataset.note), .9, .22);
+    btn.classList.add('hit'); setTimeout(function(){ btn.classList.remove('hit'); }, 120);
+  }
+  keys.forEach(function(btn){ btn.addEventListener('click', function(){ hit(btn); }); });
+  document.addEventListener('keydown', function(e){
+    if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    var n = parseInt(e.key, 10);
+    if(n >= 1 && n <= 8) hit(keys[n-1]);
+  });
+
+  // copy email
+  var ok = document.getElementById('ok'), addr = document.getElementById('addr');
+  document.getElementById('copy').addEventListener('click', function(){
+    var text = addr.textContent.trim();
+    function fallback(){
+      var r = document.createRange(); r.selectNodeContents(addr);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      ok.textContent = 'Selected. Press copy on your device.';
+    }
+    try{ navigator.clipboard.writeText(text).then(function(){ ok.textContent = 'Copied. Talk soon.'; }, fallback); }
+    catch(err){ fallback(); }
+  });
+
+  document.getElementById('yr').textContent = new Date().getFullYear();
+})();
+</script>
+
+</body>
+</html>
