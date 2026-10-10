@@ -168,6 +168,11 @@ h2{font-family:var(--font-display); font-weight:900; font-size:clamp(2.3rem,5.4v
   box-shadow:0 6px 0 #1C1A17; cursor:pointer; font:900 1.2rem var(--font-display); color:#1C1A17; transition:transform .08s, box-shadow .08s; padding:0}
 .key:active,.key.hit{transform:translateY(5px); box-shadow:0 1px 0 #1C1A17}
 .cap{margin:12px 2px 0; color:var(--ink-soft); font-size:.92rem}
+.cap .seq{display:inline-block; color:var(--ink); font-family:var(--font-display); font-weight:900; font-size:1.1rem; letter-spacing:.06em; font-variant-numeric:tabular-nums}
+.contest{margin-top:22px; padding:16px 18px; background:var(--plate); color:var(--plate-ink); border:3px dashed var(--line); border-radius:14px; transform:rotate(-.6deg)}
+.contest h3{font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.5rem; line-height:1}
+.contest p{margin:8px 0 0; font-size:.98rem}
+.contest a{color:#B52E1E; overflow-wrap:anywhere}
 
 .hunt{position:relative; background:var(--plate); color:var(--plate-ink); border:4px solid var(--line); border-radius:6px; box-shadow:7px 7px 0 var(--drop); padding:24px 22px 22px; transform:rotate(-1.2deg)}
 .hunt h3{font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.9rem; line-height:1}
@@ -436,7 +441,11 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
           <button class="key" style="--c:#E0402C" data-note="659.25" aria-label="High E">8</button>
         </div>
       </div>
-      <p class="cap">Tap the buttons, or press 1 to 8 on a keyboard. Try 1 3 5 3 1 for a lullaby.</p>
+      <p class="cap">Tap the buttons, or press 1 to 8 on a keyboard. For Mary Had a Little Lamb, try <strong class="seq">3 2 1 2 3 3 3 · 2 2 2 · 3 4 4</strong></p>
+      <div class="contest">
+        <h3>Make a song, win a prize</h3>
+        <p>Make up your own song on the robot keyboard. Write down the numbers or record yourself playing it, then have a grown-up email it to <a href="mailto:dylan%26keats@powersonicrecords.com?subject=My%20robot%20keyboard%20song">dylan&amp;keats@<wbr>powersonicrecords.com</a>. My favorites win a prize. I haven't decided what it is yet, but it'll be good.</p>
+      </div>
     </div>
 
     <div class="hunt" aria-labelledby="hunt-h">
@@ -497,6 +506,7 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
 
   <section class="listen" id="listen" aria-labelledby="listen-h">
     <h2 id="listen-h">Listen anywhere</h2>
+    <button class="bee" data-bee style="--r:-30deg; right:6%; top:0" aria-label="A bug bud! Tap to put it in the jar"><svg aria-hidden="true"><use href="#bee"/></svg></button>
     <p>Search for Dylan &amp; Keats wherever your family plays music. If the car is the only place you get to hear any, I'm happy to ride along.</p>
     <ul class="stickers">
       <li><a href="https://open.spotify.com/artist/2OoyFXCEngoAIMqV1TySp6" target="_blank" rel="noopener">Spotify</a></li>
