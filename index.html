@@ -110,7 +110,7 @@ h2{font-family:var(--font-display); font-weight:900; font-size:clamp(2.3rem,5.4v
 
 /* ---------- records ---------- */
 .records{padding-block:24px 80px}
-.crate{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:40px 30px}
+.crate{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px 44px; max-width:800px; margin-inline:auto}
 .rec{position:relative; perspective:1400px}
 .rec:nth-child(1){transform:rotate(-2deg)}
 .rec:nth-child(2){transform:rotate(1.5deg) translateY(16px)}
@@ -122,7 +122,8 @@ h2{font-family:var(--font-display); font-weight:900; font-size:clamp(2.3rem,5.4v
 .front{padding:0; cursor:pointer; font:inherit; width:100%; height:100%}
 .front img,.front svg{width:100%; height:100%; object-fit:cover; display:block}
 .back{transform:rotateY(180deg); padding:16px 16px 14px; display:flex; flex-direction:column; gap:8px; overflow:auto}
-.back h3{font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.5rem; line-height:1}
+.back{padding-bottom:26px}
+.back h3{padding-right:64px; font-family:var(--font-display); font-weight:900; text-transform:uppercase; font-size:1.5rem; line-height:1}
 .back p{margin:0; font-size:.92rem; line-height:1.45}
 .back .len{font:700 .78rem var(--font-body); letter-spacing:.08em; text-transform:uppercase; color:#54493B; font-variant-numeric:tabular-nums}
 .tracks{margin:2px 0 0; padding:0; list-style:none; counter-reset:t; font-size:.92rem; font-weight:700}
@@ -132,7 +133,7 @@ h2{font-family:var(--font-display); font-weight:900; font-size:clamp(2.3rem,5.4v
 .tracks li span:last-child{font-variant-numeric:tabular-nums; font-weight:400}
 .back .links{display:flex; flex-wrap:wrap; gap:4px 12px; margin-top:auto; font-weight:700; font-size:.9rem}
 .back .links a{color:#B52E1E}
-.flipback{align-self:flex-start; border:0; background:none; padding:0; font:700 .78rem var(--font-body); letter-spacing:.08em; text-transform:uppercase; color:#54493B; cursor:pointer}
+.flipback{position:absolute; top:12px; right:12px; align-self:flex-start; border:0; background:none; padding:0; font:700 .78rem var(--font-body); letter-spacing:.08em; text-transform:uppercase; color:#54493B; cursor:pointer}
 .flipback:hover{color:#E0402C}
 .rec .ticket{position:relative; z-index:2; margin:-14px auto 0; display:table; font-size:.98rem; text-align:center}
 .rec .ticket > span{padding-inline:1.3em}
@@ -270,6 +271,43 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
   .rec.flipped .back{display:flex}
   .rec.flipped .front{visibility:hidden}
 }
+
+/* ---------- player bar ---------- */
+.playbtn{align-self:flex-start; font:900 1.05rem var(--font-display); text-transform:uppercase; letter-spacing:.04em; padding:6px 14px 4px; border-radius:999px; border:3px solid #1C1A17; background:#9DC23A; color:#1C1A17; cursor:pointer}
+.playbtn:hover{background:#F2B630}
+.tracks .trk{display:flex; gap:8px; width:100%; border:0; background:none; padding:0; font:inherit; color:inherit; cursor:pointer; text-align:left}
+.tracks .trk:hover span:first-child{color:#B52E1E; text-decoration:underline}
+.tracks li{display:block}
+.tracks li::before{display:none}
+.trk span:first-child{flex:1}
+.trk span:last-child{font-variant-numeric:tabular-nums; font-weight:400}
+.radio{position:fixed; left:0; right:0; bottom:0; z-index:60; padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px)); background:#1C1A17; border-top:4px solid #F2B630;
+  transform:translateY(130%); transition:transform .35s cubic-bezier(.3,1.3,.5,1); visibility:hidden}
+.radio.on{transform:none; visibility:visible}
+.radio-in{max-width:780px; margin-inline:auto; display:flex; align-items:center; gap:12px}
+.radio-label{font:900 1.15rem var(--font-display); text-transform:uppercase; letter-spacing:.04em; color:#F2B630; white-space:nowrap}
+.radio-slot{flex:1; min-width:0; height:80px}
+.radio-slot iframe{display:block; width:100%; height:80px; border:0; border-radius:12px}
+.radio-x{flex:none; width:38px; height:38px; border-radius:50%; border:3px solid #F2B630; background:none; color:#F2B630; font-size:1.4rem; line-height:1; cursor:pointer}
+.radio-x:hover{background:#F2B630; color:#1C1A17}
+body.has-radio{padding-bottom:110px}
+
+/* ---------- tv ---------- */
+.watch{padding-block:0 84px}
+.tv{position:relative; max-width:760px; margin:40px auto 0; background:#E0402C; border:4px solid var(--line); border-radius:28px; padding:22px 22px 18px; box-shadow:8px 8px 0 var(--drop)}
+.tv .ant{position:absolute; top:-44px; width:5px; height:56px; background:var(--line); border-radius:3px}
+.tv .ant.l{left:38%; transform:rotate(-24deg)} .tv .ant.r{right:38%; transform:rotate(24deg)}
+.screen{position:relative; aspect-ratio:16/9; background:#1C1A17; border:4px solid var(--line); border-radius:18px; overflow:hidden}
+.screen iframe{position:absolute; inset:0; width:100%; height:100%; border:0}
+.poster{position:absolute; inset:0; display:grid; place-items:center; background:#1C1A17}
+.poster img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.75}
+.bigplay{position:relative; display:grid; place-items:center; width:92px; height:92px; border-radius:50%; background:#F2B630; border:4px solid #1C1A17; color:#1C1A17; font-size:2.4rem; padding-left:6px; box-shadow:5px 5px 0 #1C1A17; transition:transform .15s}
+.poster:hover .bigplay{transform:scale(1.08)}
+.knobs{display:flex; justify-content:flex-end; gap:12px; margin-top:12px}
+.knobs i{width:26px; height:26px; border-radius:50%; background:#F2B630; border:3px solid var(--line)}
+@media (max-width:480px){ .radio-label{display:none} .tv{padding:14px 14px 12px; border-radius:20px} .bigplay{width:70px; height:70px; font-size:1.8rem} }
+.sr{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.poster{text-decoration:none}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -329,12 +367,12 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
     <div class="crate">
       <div class="rec">
         <div class="sleeve">
-          <button class="side front" aria-expanded="false" aria-controls="b-grampa" aria-label="Grampa Ate My Socks. Flip the cover over."><img src="img/cover-grampa.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <button class="side front" aria-expanded="false" aria-controls="b-grampa" data-song="grampa" aria-label="Grampa Ate My Socks. Flip the cover over."><img src="img/cover-grampa.webp" alt="" width="800" height="800" loading="lazy"></button>
           <div class="side back" id="b-grampa">
             <h3>Grampa Ate My Socks</h3>
             <p>Every missing sock in a house has to go somewhere. This song has a theory, and it involves Grampa.</p><p class="len">2:36 · single</p>
+            <button class="playbtn" type="button" data-song="grampa">&#9654; Play</button>
             <p class="links">
-              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
               <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
               <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
             </p>
@@ -346,12 +384,13 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
 
       <div class="rec">
         <div class="sleeve">
-          <button class="side front" aria-expanded="false" aria-controls="b-bugs" aria-label="Bug Buds. Flip the cover over."><img src="img/cover-bugbuds.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <button class="side front" aria-expanded="false" aria-controls="b-bugs" data-song="bugbuds" aria-label="Bug Buds. Flip the cover over."><img src="img/cover-bugbuds.webp" alt="" width="800" height="800" loading="lazy"></button>
           <div class="side back" id="b-bugs">
             <h3>Bug Buds</h3>
-            <p>A song about making friends with bugs. Go slow and say hi to the bee. Out since January 21, 2025, and best played outside.</p><p class="len">2:01 · single</p>
+            <p>A song about making friends with bugs. Go slow and say hi to the bee.</p><p class="len">2:01 · single · Jan 2025</p>
+            <button class="playbtn" type="button" data-song="bugbuds">&#9654; Play</button>
             <p class="links">
-              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
+              <a href="#watch">Watch the video</a>
               <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
               <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
             </p>
@@ -363,12 +402,12 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
 
       <div class="rec">
         <div class="sleeve">
-          <button class="side front" aria-expanded="false" aria-controls="b-potty" aria-label="Potty Party. Flip the cover over."><img src="img/cover-potty.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <button class="side front" aria-expanded="false" aria-controls="b-potty" data-song="potty" aria-label="Potty Party. Flip the cover over."><img src="img/cover-potty.webp" alt="" width="800" height="800" loading="lazy"></button>
           <div class="side back" id="b-potty">
             <h3>Potty Party</h3>
             <p>Potty training takes a lot of patience and a lot of sitting on the bathroom floor. This song turns the scariest seat in the house into a party.</p><p class="len">2:18 · single</p>
+            <button class="playbtn" type="button" data-song="potty">&#9654; Play</button>
             <p class="links">
-              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
               <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
               <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
             </p>
@@ -380,26 +419,42 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
 
       <div class="rec">
         <div class="sleeve">
-          <button class="side front" aria-expanded="false" aria-controls="b-kd" aria-label="Kitchen Disco, the album. Flip the cover over.">
+          <button class="side front" aria-expanded="false" aria-controls="b-kd" data-song="kitchen" aria-label="Kitchen Disco, the album. Flip the cover over.">
             <img src="img/cover-kitchen-disco.webp" alt="" width="800" height="800" loading="lazy">
           </button>
           <div class="side back" id="b-kd">
             <h3>Kitchen Disco</h3>
             <p>I wrote these for Snips Tips, a kids' cooking show that hasn't come out yet. The songs got tired of waiting.</p>
             <ol class="tracks">
-              <li><span>Pizza</span><span>1:58</span></li>
-              <li><span>Nachos</span><span>2:07</span></li>
-              <li><span>French Fries</span><span>2:40</span></li>
+              <li><button type="button" class="trk" data-song="pizza"><span>Pizza</span><span>1:58</span></button></li>
+              <li><button type="button" class="trk" data-song="nachos"><span>Nachos</span><span>2:07</span></button></li>
+              <li><button type="button" class="trk" data-song="fries"><span>French Fries</span><span>2:40</span></button></li>
             </ol>
-            <p class="links">
-              <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">Spotify</a>
-              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
-                          </p>
+            <button class="playbtn" type="button" data-song="kitchen">&#9654; Play</button>
+            
             <button class="flipback" type="button">Flip back</button>
           </div>
         </div>
         <span class="ticket"><span>Kitchen Disco · album</span></span>
       </div>
+    </div>
+  </section>
+
+  <section class="watch" id="watch" aria-labelledby="watch-h">
+    <div class="sec-head">
+      <h2 id="watch-h">Watch Bug Buds</h2>
+      <p>The video. Best watched with a bug friend nearby.</p>
+    </div>
+    <div class="tv">
+      <span class="ant l" aria-hidden="true"></span><span class="ant r" aria-hidden="true"></span>
+      <div class="screen" id="tv-screen">
+        <a class="poster" id="tv-poster" href="https://www.youtube.com/@Dylan_and_Keats/search?query=Bug%20Buds" target="_blank" rel="noopener">
+          <img src="img/cover-bugbuds.webp" alt="" width="800" height="800" loading="lazy">
+          <span class="bigplay" aria-hidden="true">&#9654;</span>
+          <span class="sr">Play the Bug Buds video</span>
+        </a>
+      </div>
+      <div class="knobs" aria-hidden="true"><i></i><i></i></div>
     </div>
   </section>
 
@@ -550,12 +605,21 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
   </footer>
 </div>
 
+<div class="radio" id="radio" aria-label="Music player" role="region">
+  <div class="radio-in">
+    <span class="radio-label" aria-hidden="true">On the radio</span>
+    <div class="radio-slot"><div id="spotify-embed"></div></div>
+    <button class="radio-x" id="radio-close" type="button" aria-label="Close the player">&times;</button>
+  </div>
+</div>
+
 <script>
 (function(){
   // flip the record covers
   document.querySelectorAll('.rec').forEach(function(rec){
     var front = rec.querySelector('.front'), back = rec.querySelector('.flipback');
     front.addEventListener('click', function(){
+      if(front.dataset.song) playSong(front.dataset.song);
       rec.classList.add('flipped'); front.setAttribute('aria-expanded','true');
       setTimeout(function(){ back.focus({preventScroll:true}); }, 350);
     });
@@ -564,6 +628,70 @@ footer .hand{font-size:1.1rem; color:var(--ink)}
       front.focus({preventScroll:true});
     });
   });
+
+
+  // ---------- Spotify player ----------
+  // Paste each song's Spotify link here (in Spotify: ... > Share > Copy link). Empty ones play the playlist.
+  var PLAYLIST = 'https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz';
+  var SONGS = {
+    grampa:  '',
+    bugbuds: 'https://open.spotify.com/album/5YNrmUHkm3GBpRDDR1Pcvn',
+    potty:   '',
+    kitchen: '',
+    pizza:   '',
+    nachos:  '',
+    fries:   ''
+  };
+  // Paste the Bug Buds YouTube link here to play it inside the TV.
+  var BUG_BUDS_VIDEO = '';
+
+  function toUri(link){
+    var m = /open\.spotify\.com\/(?:intl-[a-z]+\/)?(track|album|playlist|artist)\/([A-Za-z0-9]+)/.exec(link || '');
+    return m ? 'spotify:' + m[1] + ':' + m[2] : null;
+  }
+  var radio = document.getElementById('radio'), api = null, ctrl = null, pending = null, made = false;
+  window.onSpotifyIframeApiReady = function(IFrameAPI){ api = IFrameAPI; if(pending) makeController(); };
+  (function loadApi(){
+    var s = document.createElement('script'); s.src = 'https://open.spotify.com/embed/iframe-api/v1'; s.async = true;
+    document.head.appendChild(s);
+  })();
+  function makeController(){
+    if(made || !api) return; made = true;
+    var first = pending || toUri(PLAYLIST);
+    api.createController(document.getElementById('spotify-embed'), {uri:first, width:'100%', height:80}, function(c){
+      ctrl = c;
+      c.addListener('ready', function(){ if(pending){ c.play(); pending = null; } });
+    });
+  }
+  function playSong(key){
+    var uri = toUri(SONGS[key]) || toUri(PLAYLIST);
+    radio.classList.add('on'); document.body.classList.add('has-radio');
+    if(ctrl){ ctrl.loadUri(uri); ctrl.play(); return; }
+    pending = uri; makeController();
+  }
+  document.querySelectorAll('.playbtn, .trk').forEach(function(b){
+    b.addEventListener('click', function(){ playSong(b.dataset.song); });
+  });
+  document.getElementById('radio-close').addEventListener('click', function(){
+    if(ctrl){ try{ ctrl.pause(); }catch(e){} }
+    radio.classList.remove('on'); document.body.classList.remove('has-radio');
+  });
+
+  // ---------- Bug Buds TV ----------
+  (function(){
+    var m = /(?:youtu\.be\/|v=|shorts\/|embed\/)([A-Za-z0-9_-]{11})/.exec(BUG_BUDS_VIDEO);
+    if(!m) return;
+    var id = m[1], poster = document.getElementById('tv-poster');
+    poster.href = 'https://www.youtube.com/watch?v=' + id;
+    poster.addEventListener('click', function(e){
+      e.preventDefault();
+      if(ctrl){ try{ ctrl.pause(); }catch(err){} }
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+      f.title = 'Bug Buds video'; f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true;
+      document.getElementById('tv-screen').replaceChildren(f);
+    });
+  })();
 
   // dress-up
   var outfits = [
