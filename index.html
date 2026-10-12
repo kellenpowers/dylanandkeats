@@ -328,6 +328,29 @@ button,a{touch-action:manipulation}
   .back h3{font-size:1.3rem}
   .back .links a{padding-block:8px}
 }
+
+/* ---------- bee hunt reward ---------- */
+.win{position:fixed; inset:0; z-index:100; display:grid; place-items:center; padding:16px; background:rgba(28,26,23,.6)}
+.win[hidden]{display:none}
+.win-card{position:relative; width:100%; max-width:420px; max-height:calc(100vh - 32px); overflow:auto; text-align:center; background:var(--plate); color:var(--plate-ink);
+  border:4px solid #1C1A17; border-radius:18px; box-shadow:8px 8px 0 #1C1A17; padding:22px 22px 24px; animation:winpop .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes winpop{0%{transform:scale(.5) rotate(-6deg); opacity:0}100%{transform:none; opacity:1}}
+.badge-svg{display:block; width:min(170px,50%); height:auto; margin:4px auto 0; animation:wobble 1.6s ease-in-out .5s 2}
+@keyframes wobble{25%{transform:rotate(-6deg)}75%{transform:rotate(6deg)}}
+.win-kicker{margin:4px 0 0; font:900 1rem var(--font-display); letter-spacing:.2em; text-transform:uppercase; color:#B52E1E}
+.win-name{font-size:1.7rem; margin-top:4px; max-width:100%}
+.win-name > span{overflow-wrap:anywhere}
+.win h2{margin-top:16px; font-size:clamp(1.7rem,7vw,2.3rem); color:#1C1A17}
+.win-msg{margin:8px auto 0; max-width:30ch}
+.win-label{display:block; margin-top:16px; font-weight:700; font-size:.92rem}
+#bud-name{display:block; width:100%; max-width:260px; margin:6px auto 0; font:700 1.1rem var(--font-body); text-align:center; padding:10px 12px; border:3px solid #1C1A17; border-radius:12px; background:#fff; color:#1C1A17}
+.win-row{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:18px}
+.win-row .go{margin-top:0; font-size:1.15rem}
+.win-row .btn{min-height:44px}
+.win-x{position:absolute; top:8px; right:8px; width:44px; height:44px; border:0; background:none; font-size:1.8rem; line-height:1; color:#1C1A17; cursor:pointer}
+.confetti{position:fixed; inset:0; width:100%; height:100%; z-index:110; pointer-events:none}
+.jar.full{animation:jarshake .5s ease-in-out 3}
+@keyframes jarshake{25%{transform:rotate(-5deg)}75%{transform:rotate(5deg)}}
 [hidden]{display:none!important}
 </style>
 </head>
@@ -653,6 +676,29 @@ button,a{touch-action:manipulation}
   </footer>
 </div>
 
+<div class="win" id="win" role="dialog" aria-modal="true" aria-labelledby="win-h" hidden>
+  <div class="win-card">
+    <button class="win-x" id="win-close" type="button" aria-label="Close">&times;</button>
+    <svg class="badge-svg" viewBox="0 0 220 230" aria-hidden="true">
+      <path d="M62 150 40 222l34-14 22 26 20-72Z M158 150l22 72-34-14-22 26-20-72Z" fill="#E0402C" stroke="#1C1A17" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="110" cy="100" r="88" fill="#F2B630" stroke="#1C1A17" stroke-width="6"/>
+      <circle cx="110" cy="100" r="72" fill="none" stroke="#1C1A17" stroke-width="2.5" stroke-dasharray="3 7" stroke-linecap="round"/>
+      <use href="#bee" x="52" y="46" width="116" height="102"/>
+    </svg>
+    <p class="win-kicker">Official</p>
+    <span class="ticket win-name"><span id="badge-name">Bug Bud</span></span>
+    <h2 id="win-h">You found all 7 bees!</h2>
+    <p class="win-msg">They say thank you. That makes you an official Bug Bud.</p>
+    <label class="win-label" for="bud-name">Put your name on the badge</label>
+    <input id="bud-name" type="text" maxlength="18" autocomplete="off" placeholder="Your name">
+    <div class="win-row">
+      <button class="go win-play" id="win-play" type="button">&#9654; Play Bug Buds</button>
+      <button class="btn" id="win-release" type="button">Let them fly home</button>
+    </div>
+  </div>
+</div>
+<canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
 <div class="radio" id="radio" aria-label="Music player" role="region">
   <div class="radio-in">
     <span class="radio-label" aria-hidden="true">On the radio</span>
@@ -772,12 +818,14 @@ button,a{touch-action:manipulation}
   bees.forEach(function(b){
     b.addEventListener('click', function(){
       if(b.classList.contains('caught')) return;
+      unlockAudio();
       b.classList.add('caught'); found++; chirp(); render();
+      if(found >= total) setTimeout(celebrate, 450);
       setTimeout(function(){ b.hidden = true; }, 600);
     });
   });
   release.addEventListener('click', function(){
-    found = 0; release.hidden = true;
+    found = 0; release.hidden = true; document.querySelector('.jar').classList.remove('full');
     bees.forEach(function(b){ b.hidden = false; b.classList.remove('caught'); });
     render(); count.textContent = 'Bye bees! They flew back to their hiding spots.';
   });
@@ -803,18 +851,87 @@ button,a{touch-action:manipulation}
       o.connect(og); og.connect(g); o.start(t); o.stop(t + dur + .05);
     });
   }
+  // iPhones mute web sound when the ring switch is on silent. Asking for "playback"
+  // (and playing a silent clip once) lets the keyboard and bees be heard, like a video would.
+  var unlocked = false;
+  function unlockAudio(){
+    var c = audio();
+    if(unlocked) return; unlocked = true;
+    try{ if(navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(e){}
+    if(c){ try{ var buf = c.createBuffer(1, 1, 22050), src = c.createBufferSource(); src.buffer = buf; src.connect(c.destination); src.start(0); }catch(e){} }
+    try{ var el = new Audio('data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSADAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA=='); el.setAttribute('playsinline',''); var p = el.play(); if(p && p.catch) p.catch(function(){}); }catch(e){}
+  }
   function chirp(){ tone(880, .12, .1); setTimeout(function(){ tone(1174.66, .16, .09); }, 80); }
   var keys = document.querySelectorAll('.key');
   function hit(btn){
     tone(parseFloat(btn.dataset.note), .9, .22);
     btn.classList.add('hit'); setTimeout(function(){ btn.classList.remove('hit'); }, 120);
   }
-  keys.forEach(function(btn){ btn.addEventListener('click', function(){ hit(btn); }); });
+  keys.forEach(function(btn){
+    // Play on finger-down once sound is unlocked, so fast tapping feels like a real instrument.
+    btn.addEventListener('pointerdown', function(){
+      if(ctx && ctx.state === 'running'){ hit(btn); btn._played = true; }
+    });
+    // The first tap (and keyboard Enter/Space) arrives as a click, which is when phones allow sound.
+    btn.addEventListener('click', function(){
+      unlockAudio();
+      if(!btn._played) hit(btn);
+      btn._played = false;
+    });
+  });
   document.addEventListener('keydown', function(e){
     if(e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
     var n = parseInt(e.key, 10);
-    if(n >= 1 && n <= 8) hit(keys[n-1]);
+    if(n >= 1 && n <= 8){ unlockAudio(); hit(keys[n-1]); }
   });
+
+  // ---------- all bees found ----------
+  var win = document.getElementById('win'), lastFocus = null;
+  var nameIn = document.getElementById('bud-name'), badgeName = document.getElementById('badge-name');
+  nameIn.addEventListener('input', function(){ badgeName.textContent = nameIn.value.trim() || 'Bug Bud'; });
+  function fanfare(){
+    [[523.25,0,.16,.22],[659.25,140,.16,.22],[783.99,280,.16,.22],[1046.5,420,.9,.28],[659.25,420,.9,.12],[783.99,420,.9,.12],
+     [783.99,1000,.14,.2],[1046.5,1150,1.1,.28],[1318.51,1150,1.1,.14]].forEach(function(n){
+      setTimeout(function(){ tone(n[0], n[2], n[3]); }, n[1]);
+    });
+  }
+  function confetti(){
+    if(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var cv = document.getElementById('confetti'), g = cv.getContext('2d'), dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var W = cv.width = innerWidth * dpr, H = cv.height = innerHeight * dpr;
+    var colors = ['#E0402C','#F2B630','#9DC23A','#4FA3D9','#F59A8C','#FBF5E8'], bits = [];
+    for(var i = 0; i < 170; i++){
+      bits.push({x: W/2 + (Math.random()-.5)*W*.3, y: H*.55, vx: (Math.random()-.5)*16*dpr, vy: -(8 + Math.random()*14)*dpr,
+        w: (6 + Math.random()*8)*dpr, h: (4 + Math.random()*6)*dpr, a: Math.random()*6, va: (Math.random()-.5)*.3, c: colors[i % colors.length]});
+    }
+    var t0 = performance.now();
+    (function frame(now){
+      g.clearRect(0, 0, W, H);
+      var alive = false;
+      bits.forEach(function(p){
+        p.vy += .35*dpr; p.vx *= .99; p.x += p.vx; p.y += p.vy; p.a += p.va;
+        if(p.y < H + 40) alive = true;
+        g.save(); g.translate(p.x, p.y); g.rotate(p.a); g.fillStyle = p.c; g.fillRect(-p.w/2, -p.h/2, p.w, p.h); g.restore();
+      });
+      if(alive && now - t0 < 6000) requestAnimationFrame(frame); else g.clearRect(0, 0, W, H);
+    })(t0);
+  }
+  function celebrate(){
+    document.querySelector('.jar').classList.add('full');
+    fanfare(); confetti();
+    lastFocus = document.activeElement;
+    win.hidden = false;
+    setTimeout(function(){ document.getElementById('win-play').focus(); }, 60);
+  }
+  function closeWin(){
+    win.hidden = true;
+    if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
+  }
+  document.getElementById('win-close').addEventListener('click', closeWin);
+  win.addEventListener('click', function(e){ if(e.target === win) closeWin(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !win.hidden) closeWin(); });
+  document.getElementById('win-play').addEventListener('click', function(){ closeWin(); playSong('bugbuds'); });
+  document.getElementById('win-release').addEventListener('click', function(){ closeWin(); release.click(); });
 
   // copy email
   var ok = document.getElementById('ok'), addr = document.getElementById('addr');
