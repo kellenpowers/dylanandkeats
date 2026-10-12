@@ -110,12 +110,15 @@ h2{font-family:var(--font-display); font-weight:900; font-size:clamp(2.3rem,5.4v
 
 /* ---------- records ---------- */
 .records{padding-block:24px 80px}
-.crate{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:48px 44px; max-width:800px; margin-inline:auto}
+.crate{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:52px 40px; max-width:1060px; margin-inline:auto}
+@media (max-width:900px){ .crate{grid-template-columns:repeat(2,minmax(0,1fr)); max-width:760px} }
 .rec{position:relative; perspective:1400px}
 .rec:nth-child(1){transform:rotate(-2deg)}
 .rec:nth-child(2){transform:rotate(1.5deg) translateY(16px)}
 .rec:nth-child(3){transform:rotate(-1deg)}
 .rec:nth-child(4){transform:rotate(2deg) translateY(10px)}
+.rec:nth-child(5){transform:rotate(-1.5deg) translateY(6px)}
+.rec:nth-child(6){transform:rotate(1deg)}
 .sleeve{position:relative; aspect-ratio:1; transition:transform .7s cubic-bezier(.3,1.35,.5,1); transform-style:preserve-3d}
 .rec.flipped .sleeve{transform:rotateY(180deg)}
 .side{position:absolute; inset:0; border:4px solid var(--line); border-radius:6px; box-shadow:7px 7px 0 var(--drop); backface-visibility:hidden; -webkit-backface-visibility:hidden; overflow:hidden; background:var(--plate); color:var(--plate-ink)}
@@ -362,7 +365,7 @@ body.has-radio{padding-bottom:110px}
   <section class="records" id="records" aria-labelledby="rec-h">
     <div class="sec-head">
       <h2 id="rec-h">The songs</h2>
-      <p>Six songs so far. Tap a cover to flip it over and read the story behind it, or <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">play them all on Spotify</a>.</p>
+      <p>Six songs so far. Tap a cover to hear it and read the story behind it, or <a href="https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz" target="_blank" rel="noopener">play them all on Spotify</a>.</p>
     </div>
     <div class="crate">
       <div class="rec">
@@ -419,23 +422,51 @@ body.has-radio{padding-bottom:110px}
 
       <div class="rec">
         <div class="sleeve">
-          <button class="side front" aria-expanded="false" aria-controls="b-kd" data-song="kitchen" aria-label="Kitchen Disco, the album. Flip the cover over.">
-            <img src="img/cover-kitchen-disco.webp" alt="" width="800" height="800" loading="lazy">
-          </button>
-          <div class="side back" id="b-kd">
-            <h3>Kitchen Disco</h3>
-            <p>I wrote these for Snips Tips, a kids' cooking show that hasn't come out yet. The songs got tired of waiting.</p>
-            <ol class="tracks">
-              <li><button type="button" class="trk" data-song="pizza"><span>Pizza</span><span>1:58</span></button></li>
-              <li><button type="button" class="trk" data-song="nachos"><span>Nachos</span><span>2:07</span></button></li>
-              <li><button type="button" class="trk" data-song="fries"><span>French Fries</span><span>2:40</span></button></li>
-            </ol>
-            <button class="playbtn" type="button" data-song="kitchen">&#9654; Play</button>
-            
+          <button class="side front" aria-expanded="false" aria-controls="b-pizza" data-song="pizza" aria-label="Pizza. Play it and flip the cover over."><img src="img/cover-pizza.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <div class="side back" id="b-pizza">
+            <h3>Pizza</h3>
+            <p>Written for Snips Tips, a kids' cooking show that hasn't come out yet. Pizza is the one dinner nobody at our table argues about.</p><p class="len">1:58 · from Kitchen Disco</p>
+            <button class="playbtn" type="button" data-song="pizza">&#9654; Play</button>
+            <p class="links">
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
+            </p>
             <button class="flipback" type="button">Flip back</button>
           </div>
         </div>
-        <span class="ticket"><span>Kitchen Disco · album</span></span>
+        <span class="ticket"><span>Pizza</span></span>
+      </div>
+      <div class="rec">
+        <div class="sleeve">
+          <button class="side front" aria-expanded="false" aria-controls="b-nachos" data-song="nachos" aria-label="Nachos. Play it and flip the cover over."><img src="img/cover-nachos.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <div class="side back" id="b-nachos">
+            <h3>Nachos</h3>
+            <p>Another one from Snips Tips. Pile on the cheese and see how much more you can sneak on top.</p><p class="len">2:07 · from Kitchen Disco</p>
+            <button class="playbtn" type="button" data-song="nachos">&#9654; Play</button>
+            <p class="links">
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
+            </p>
+            <button class="flipback" type="button">Flip back</button>
+          </div>
+        </div>
+        <span class="ticket"><span>Nachos</span></span>
+      </div>
+      <div class="rec">
+        <div class="sleeve">
+          <button class="side front" aria-expanded="false" aria-controls="b-fries" data-song="fries" aria-label="French Fries. Play it and flip the cover over."><img src="img/cover-fries.webp" alt="" width="800" height="800" loading="lazy"></button>
+          <div class="side back" id="b-fries">
+            <h3>French Fries</h3>
+            <p>Also from Snips Tips. Crinkle cut, with way too much ketchup.</p><p class="len">2:40 · from Kitchen Disco</p>
+            <button class="playbtn" type="button" data-song="fries">&#9654; Play</button>
+            <p class="links">
+              <a href="https://music.apple.com/us/artist/dylan-keats/1485634929" target="_blank" rel="noopener">Apple Music</a>
+              <a href="https://www.youtube.com/@Dylan_and_Keats" target="_blank" rel="noopener">YouTube</a>
+            </p>
+            <button class="flipback" type="button">Flip back</button>
+          </div>
+        </div>
+        <span class="ticket"><span>French Fries</span></span>
       </div>
     </div>
   </section>
@@ -634,16 +665,15 @@ body.has-radio{padding-bottom:110px}
   // Paste each song's Spotify link here (in Spotify: ... > Share > Copy link). Empty ones play the playlist.
   var PLAYLIST = 'https://open.spotify.com/playlist/3BTQaR8bSMAAjLi2AtLHIz';
   var SONGS = {
-    grampa:  '',
-    bugbuds: 'https://open.spotify.com/album/5YNrmUHkm3GBpRDDR1Pcvn',
-    potty:   '',
-    kitchen: '',
-    pizza:   '',
-    nachos:  '',
-    fries:   ''
+    grampa:  'https://open.spotify.com/track/6wKTUAHMxFbnzMT95uDt3u',
+    bugbuds: 'https://open.spotify.com/track/6oavn0tH6mPj2dt9zUJElr',
+    potty:   'https://open.spotify.com/track/5UMXAk2SJ5kFf2131Ap6Am',
+    pizza:   'https://open.spotify.com/track/1xQUtpwBE9NyGiJkZAP8X9',
+    nachos:  'https://open.spotify.com/track/4ccCIrL1PQ4Fn9rxWrvgp3',
+    fries:   'https://open.spotify.com/track/4yEfCroMT5SYUE4kaZTSiY'
   };
   // Paste the Bug Buds YouTube link here to play it inside the TV.
-  var BUG_BUDS_VIDEO = '';
+  var BUG_BUDS_VIDEO = 'https://youtu.be/LQcWYvRpRY0';
 
   function toUri(link){
     var m = /open\.spotify\.com\/(?:intl-[a-z]+\/)?(track|album|playlist|artist)\/([A-Za-z0-9]+)/.exec(link || '');
