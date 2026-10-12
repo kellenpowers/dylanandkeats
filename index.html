@@ -6,11 +6,17 @@
 <meta name="description" content="Dylan & Keats makes playful, heartfelt kids' songs born from the chaos of parenting. Songs by Kellen Powers.">
 <meta property="og:title" content="Dylan &amp; Keats">
 <meta property="og:description" content="Dylan & Keats makes playful, heartfelt kids' songs born from the chaos of parenting. Songs by Kellen Powers.">
-<meta property="og:url" content="https://dylanandkeats.com">
+<meta property="og:url" content="https://dylanandkeats.com/">
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#EFDEC2">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='7' r='3.8' fill='%231F2547'/%3E%3Cellipse cx='12' cy='14.6' rx='7.8' ry='8' fill='%23E5352B' stroke='%231F2547' stroke-width='1.4'/%3E%3Cpath d='M12 7.5v15' stroke='%231F2547' stroke-width='1.4'/%3E%3Ccircle cx='8.4' cy='12.4' r='1.6' fill='%231F2547'/%3E%3Ccircle cx='15.6' cy='12.4' r='1.6' fill='%231F2547'/%3E%3Ccircle cx='8.9' cy='18' r='1.3' fill='%231F2547'/%3E%3Ccircle cx='15.1' cy='18' r='1.3' fill='%231F2547'/%3E%3C/svg%3E">
-<meta property="og:image" content="https://dylanandkeats.com/img/logo.webp">
+<meta property="og:image" content="https://dylanandkeats.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Dylan &amp; Keats robot logo next to the words Songs about potties, bugs and pizza, with three song covers.">
+<meta property="og:site_name" content="Dylan &amp; Keats">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://dylanandkeats.com/img/og.jpg">
 <link rel="apple-touch-icon" href="img/logo.webp">
 <link rel="canonical" href="https://dylanandkeats.com/">
 <title>Dylan &amp; Keats</title>
@@ -347,6 +353,10 @@ button,a{touch-action:manipulation}
 .win-row{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:18px}
 .win-row .go{margin-top:0; font-size:1.15rem}
 .win-row .btn{min-height:44px}
+.win-row .win-share{flex-basis:100%; justify-content:center; max-width:320px; background:#E0402C; color:#FBF5E8}
+.win-row .win-share:hover{color:#FBF5E8}
+.win-row .win-share[disabled]{opacity:.7; cursor:wait}
+.win-status{margin:10px 0 0; min-height:1.3em; font-size:.92rem; color:#2E6B1F}
 .win-x{position:absolute; top:8px; right:8px; width:44px; height:44px; border:0; background:none; font-size:1.8rem; line-height:1; color:#1C1A17; cursor:pointer}
 .confetti{position:fixed; inset:0; width:100%; height:100%; z-index:110; pointer-events:none}
 .jar.full{animation:jarshake .5s ease-in-out 3}
@@ -689,12 +699,14 @@ button,a{touch-action:manipulation}
     <span class="ticket win-name"><span id="badge-name">Bug Bud</span></span>
     <h2 id="win-h">You found all 7 bees!</h2>
     <p class="win-msg">They say thank you. That makes you an official Bug Bud.</p>
-    <label class="win-label" for="bud-name">Put your name on the badge</label>
-    <input id="bud-name" type="text" maxlength="18" autocomplete="off" placeholder="Your name">
+    <label class="win-label" for="bud-name">Put your first name on the badge</label>
+    <input id="bud-name" type="text" maxlength="18" autocomplete="off" placeholder="First name only">
     <div class="win-row">
-      <button class="go win-play" id="win-play" type="button">&#9654; Play Bug Buds</button>
+      <button class="go win-share" id="win-share" type="button">Save or share my badge</button>
+      <button class="btn win-play" id="win-play" type="button">&#9654; Play Bug Buds</button>
       <button class="btn" id="win-release" type="button">Let them fly home</button>
     </div>
+    <p class="win-status" id="win-status" aria-live="polite"></p>
   </div>
 </div>
 <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
@@ -921,12 +933,94 @@ button,a{touch-action:manipulation}
     fanfare(); confetti();
     lastFocus = document.activeElement;
     win.hidden = false;
-    setTimeout(function(){ document.getElementById('win-play').focus(); }, 60);
+    setTimeout(function(){ document.getElementById('win-share').focus(); }, 60);
+    prepCert();
   }
   function closeWin(){
     win.hidden = true;
     if(lastFocus && lastFocus.focus) lastFocus.focus({preventScroll:true});
   }
+  // ---------- shareable certificate (drawn on the device, never uploaded) ----------
+  var INK = '#1C1A17', certBlob = null, certFor = null, certTimer = null, logoImg = null;
+  var shareBtn = document.getElementById('win-share'), winStatus = document.getElementById('win-status');
+  function budName(){ return nameIn.value.trim(); }
+  function loadLogo(){
+    if(logoImg) return Promise.resolve(logoImg);
+    return new Promise(function(res){ var i = new Image(); i.onload = function(){ logoImg = i; res(i); }; i.onerror = function(){ res(null); }; i.src = 'img/logo.webp'; });
+  }
+  function rr(g, x, y, w, h, rad){ g.beginPath(); g.moveTo(x+rad, y); g.arcTo(x+w, y, x+w, y+h, rad); g.arcTo(x+w, y+h, x, y+h, rad); g.arcTo(x, y+h, x, y, rad); g.arcTo(x, y, x+w, y, rad); g.closePath(); }
+  function fitFont(g, text, weightFamily, max, start){ var size = start; do { g.font = weightFamily.replace('%', size); size -= 4; } while(g.measureText(text).width > max && size > 40); }
+  function drawBadge(g, cx, top, scale){
+    g.save(); g.translate(cx - 110*scale, top); g.scale(scale, scale);
+    g.lineJoin = 'round'; g.lineCap = 'round'; g.strokeStyle = INK;
+    var rib = new Path2D('M62 150 40 222l34-14 22 26 20-72Z M158 150l22 72-34-14-22 26-20-72Z');
+    g.fillStyle = '#E0402C'; g.fill(rib); g.lineWidth = 5; g.stroke(rib);
+    g.beginPath(); g.arc(110, 100, 88, 0, Math.PI*2); g.fillStyle = '#F2B630'; g.fill(); g.lineWidth = 6; g.stroke();
+    g.beginPath(); g.arc(110, 100, 72, 0, Math.PI*2); g.setLineDash([3, 7]); g.lineWidth = 2.5; g.stroke(); g.setLineDash([]);
+    g.translate(52, 46); g.scale(116/34, 102/30);
+    function ell(x, y, rx, ry, fill, lw){ g.beginPath(); g.ellipse(x, y, rx, ry, 0, 0, Math.PI*2); g.fillStyle = fill; g.fill(); if(lw){ g.lineWidth = lw; g.stroke(); } }
+    ell(13, 8, 6.5, 5.5, '#EAF6FF', 1.6); ell(20.5, 7, 5.5, 5, '#EAF6FF', 1.6);
+    g.fillStyle = INK; g.fill(new Path2D('M4.5 19.5 0.8 20.8 4.6 22.4Z'));
+    ell(16, 19.5, 11.5, 8.2, '#F2B630', 1.8);
+    g.lineWidth = 3; g.stroke(new Path2D('M12.5 11.8q-2.2 7.7 0 15.4M19 11.6q-2.2 7.9 0 15.8'));
+    ell(28, 17, 4.6, 4.6, INK); ell(29.4, 15.8, 1.3, 1.3, '#fff');
+    g.lineWidth = 1.3; g.stroke(new Path2D('M27 12.6q-1-4 1.5-6.5M30 13q1.5-3.6 4-4.2'));
+    g.restore();
+  }
+  function makeCert(name, skipLogo){
+    var fonts = document.fonts ? Promise.all([
+      document.fonts.load('900 120px "Londrina Solid"'), document.fonts.load('700 40px "Shantell Sans"'), document.fonts.load('700 30px "Atkinson Hyperlegible"')
+    ]).catch(function(){}) : Promise.resolve();
+    return Promise.all([fonts, loadLogo()]).then(function(r){
+      var logo = r[1], c = document.createElement('canvas'); c.width = 1080; c.height = 1350;
+      var g = c.getContext('2d'), DISPLAY = '900 %px "Londrina Solid", Impact, sans-serif';
+      g.fillStyle = '#EFDEC2'; g.fillRect(0, 0, 1080, 1350);
+      rr(g, 78, 78, 960, 1230, 40); g.fillStyle = INK; g.fill();
+      rr(g, 60, 60, 960, 1230, 40); g.fillStyle = '#FBF5E8'; g.fill(); g.lineWidth = 10; g.strokeStyle = INK; g.stroke();
+      if(logo && !skipLogo){ g.save(); g.beginPath(); g.arc(540, 225, 135, 0, Math.PI*2); g.clip(); g.drawImage(logo, 405, 90, 270, 270); g.restore(); }
+      g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+      g.fillStyle = '#B52E1E'; g.font = DISPLAY.replace('%', 46); g.fillText('THIS CERTIFIES THAT', 540, 430);
+      var nm = (name || 'Somebody awesome').toUpperCase();
+      g.fillStyle = INK; fitFont(g, nm, DISPLAY, 840, 150); g.fillText(nm, 540, 570);
+      g.lineWidth = 12; g.strokeStyle = '#F2B630'; g.lineCap = 'round';
+      g.beginPath(); g.moveTo(250, 600); for(var x = 250; x <= 830; x += 40){ g.quadraticCurveTo(x + 20, x % 80 ? 586 : 614, x + 40, 600); } g.stroke();
+      g.fillStyle = INK; g.font = DISPLAY.replace('%', 72); g.fillText('IS AN OFFICIAL BUG BUD', 540, 700);
+      drawBadge(g, 540, 735, 1.55);
+      g.font = '700 40px "Shantell Sans", "Comic Neue", cursive'; g.fillText('Found all 7 bees at', 540, 1155);
+      g.fillStyle = '#B52E1E'; g.font = DISPLAY.replace('%', 66); g.fillText('dylanandkeats.com', 540, 1225);
+      g.fillStyle = '#54493B'; g.font = '700 28px "Atkinson Hyperlegible", Verdana, sans-serif';
+      g.fillText(new Date().toLocaleDateString(undefined, {month:'long', day:'numeric', year:'numeric'}), 540, 1268);
+      return new Promise(function(res, rej){ try{ c.toBlob(function(b){ b ? res(b) : rej(new Error('empty')); }, 'image/png'); }catch(e){ rej(e); } });
+    }).catch(function(e){ if(!skipLogo) return makeCert(name, true); throw e; });
+  }
+  function prepCert(){
+    var nm = budName();
+    return makeCert(nm).then(function(b){ if(budName() === nm){ certBlob = b; certFor = nm; } return b; }).catch(function(){ return null; });
+  }
+  nameIn.addEventListener('input', function(){ certBlob = null; clearTimeout(certTimer); certTimer = setTimeout(prepCert, 350); });
+  function saveFile(blob){
+    var a = document.createElement('a'), url = URL.createObjectURL(blob);
+    a.href = url; a.download = 'official-bug-bud.png'; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+    winStatus.textContent = 'Saved! Look for official-bug-bud.png in your downloads.';
+  }
+  function shareBlob(blob){
+    var file = new File([blob], 'official-bug-bud.png', {type:'image/png'});
+    if(navigator.canShare && navigator.share && navigator.canShare({files:[file]})){
+      navigator.share({files:[file], title:'Official Bug Bud',
+        text:"I found all 7 bees! I'm an official Bug Bud. Can you find them? https://dylanandkeats.com"})
+        .then(function(){ winStatus.textContent = 'Shared. Bzz!'; })
+        .catch(function(e){ if(e && e.name === 'AbortError') return; saveFile(blob); });
+    } else saveFile(blob);
+  }
+  shareBtn.addEventListener('click', function(){
+    winStatus.textContent = '';
+    // Share right away if the badge image is already made, so the phone still counts it as a tap.
+    if(certBlob && certFor === budName()){ shareBlob(certBlob); return; }
+    shareBtn.disabled = true; var label = shareBtn.textContent; shareBtn.textContent = 'Making your badge...';
+    prepCert().then(function(b){ shareBtn.disabled = false; shareBtn.textContent = label; if(b) shareBlob(b); else winStatus.textContent = 'Sorry, that did not work. Try again?'; });
+  });
+
   document.getElementById('win-close').addEventListener('click', closeWin);
   win.addEventListener('click', function(e){ if(e.target === win) closeWin(); });
   document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && !win.hidden) closeWin(); });
